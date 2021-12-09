@@ -3,18 +3,38 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
+# Use Rack Cors for handling Cross-Origin Resource Sharing(Cors)
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+
+# Use to protect API from external calls
+gem 'rack-attack', '~> 6.5'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+# Result pagination
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'
+# Authorization
+gem 'cancancan', '~> 3.3'
+# Follow user
+gem 'acts_as_follower', '~> 0.2.1'
+# Like content
+gem 'acts_as_votable', '~> 0.13.2'
+# Integration with Searchkick
+gem 'searchkick', '~> 4.6', '>= 4.6.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+# jwt authentication
+gem 'knock', '~> 2.1', '>= 2.1.1'
+# Serializer json
+gem 'active_model_serializers', '~> 0.10.12'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -25,9 +45,22 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+group :test do
+  # Generate record based in a model
+  gem 'factory_bot_rails', '~> 6.2'
+  # Fakker datas
+  gem 'ffaker', '~> 2.20'
+  # Clean db adter test
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
+end
+
 group :development, :test do
+  # Test framework
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Rspec test auxiliar gem
+  gem 'rspec-expectations', '~> 3.10', '>= 3.10.1'
 end
 
 group :development do
