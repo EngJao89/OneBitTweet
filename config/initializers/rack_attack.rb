@@ -1,13 +1,20 @@
-module Rack
-  class Attack
-    Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+class Rack::Attack
+  safelist('allow from valid ips') do |req|
+    valid_ip_addresses.include? req.ip
+  end
 
-    #Allow all local traffic
-    safelist('allow-localhost') do |req|
-      req.ip == '127.0.0.1' || req.ip == '::1'
-    end
-
-    # Allow an IP address to make 5 requests every 5 seconds
-    throttle('req/ip' limit: 5, period: 5, &ip)
+  def valid_ip_addresses
+    [
+      '62.232.106.226',
+      '34.250.171.137',
+      '52.51.160.179',
+      '63.32.127.29',
+      '34.247.249.220',
+      '18.203.227.175',
+      '18.203.205.196',
+      '34.242.105.221',
+      '52.50.60.26',
+      '127.0.0.1'
+    ]
   end
 end
